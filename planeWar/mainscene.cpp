@@ -5,7 +5,6 @@
 #include <QMouseEvent>
 #include <ctime>
 #include <QSound>
-#include <QDebug>
 
 MainScene::MainScene(QWidget *parent)
     : QWidget(parent)
@@ -209,7 +208,6 @@ void MainScene::collisionDetection()
                 // 爆炸音乐
                 QSound::play(SOUND_BOMB);
                 m_count += 5;
-                qDebug() << "计分:" << m_count;
 
                 // 播放爆炸效果
                 for (int k = 0; k < BOMB_NUM; k++) {
