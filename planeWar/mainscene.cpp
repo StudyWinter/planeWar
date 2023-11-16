@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <ctime>
 #include <QSound>
+#include <QDebug>
 
 MainScene::MainScene(QWidget *parent)
     : QWidget(parent)
@@ -31,11 +32,13 @@ void MainScene::initScene()
     //设置窗口标题
     setWindowTitle(GAME_TITLE);
     // 加载图片
-    setWindowIcon(QIcon(GAME_ICON));
+    setWindowIcon(QIcon(GAME_ICON));    
     // 定时器设置
     m_timer.setInterval(GAME_RATE);
     // 敌机出场间隔
     m_recorder = 0;
+    // 初始化计分为0
+    m_count = 0;
 }
 
 // 启动游戏  用于启动定时器对象
@@ -126,6 +129,14 @@ void MainScene::paintEvent(QPaintEvent *event)
             painter.drawPixmap(m_bombs[i].m_x, m_bombs[i].m_y, m_bombs[i].m_pixarr[m_bombs[i].m_index]);
         }
     }
+
+
+    // 绘制计分
+    painter.setFont(QFont("宋体", 15));         // 设置字体字号
+    painter.setPen(QColor(Qt::red));
+    painter.drawText(0, 30, QString("得分:"));
+    QString str = QString::number(m_count);
+    painter.drawText(80, 30, str);
 }
 
 // 鼠标移动事件
@@ -197,6 +208,8 @@ void MainScene::collisionDetection()
 
                 // 爆炸音乐
                 QSound::play(SOUND_BOMB);
+                m_count += 5;
+                qDebug() << "计分:" << m_count;
 
                 // 播放爆炸效果
                 for (int k = 0; k < BOMB_NUM; k++) {

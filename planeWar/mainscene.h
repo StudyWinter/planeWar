@@ -52,5 +52,7 @@ public:
     // 爆炸数组
     Bomb m_bombs[BOMB_NUM];
 
+    // 计分
+    int m_count;
 };
 #endif // MAINSCENE_H
