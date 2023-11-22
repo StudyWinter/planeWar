@@ -5,7 +5,7 @@
 #include <QTimer>
 #include "map.h"
 #include "heroplane.h"
-#include "bullet.h"
+#include "herobullet.h"
 #include "enemyplane.h"
 #include "bomb.h"
 
@@ -34,6 +34,7 @@ public:
     Map m_map;
     // 飞机对象
     HeroPlane m_hero;
+
     // 鼠标移动事件
     void mouseMoveEvent(QMouseEvent*);
 

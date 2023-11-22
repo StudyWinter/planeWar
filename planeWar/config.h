@@ -10,7 +10,7 @@
 #define GAME_ICON ":/res/app.ico"                   // 图标路径
 
 /*************************地图信息***********************************/
-#define MAP_PATH ":/res/img_bg_level_3.jpg"        // 地图1图片路径
+#define MAP_PATH ":/res/img_bg_level_3.jpg"         // 地图1图片路径
 #define MAP_SCROLL_SPEED 2                          // 地图滚动速度
 
 
@@ -29,9 +29,19 @@
 
 /************************敌机配置数据***********************************/
 #define ENEMY_PATH ":/res/img-plane_5.png"          // 敌机图片路径
-#define ENEMY_SPEED 5                               // 敌机移动速度
+#define ENEMY_SPEED 3                               // 敌机移动速度
 #define ENEMY_NUM 20                                // 敌机总数量
 #define ENEMY_INYERVAl 30                           // 敌机出场时间间隔
+
+
+/************************敌机发射子弹***********************************/
+#define ENEMY_BULLET_PATH ":/res/bullet_4.png"      // 敌机子弹图片路径
+#define ENEMY_BULLET_SPEED 5                        // 敌机子弹移动速度
+#define ENEMY_BULLET_NUM 15                         // 每个敌机弹匣中子弹总数
+#define ENEMY_BULLET_INTERVAL 40                    // 每个敌机发射子弹时间间隔
+
+
+
 
 /************************爆炸配置数据***********************************/
 #define BOMB_PATH ":/res/bomb-%1.png"               // 爆炸图片路径

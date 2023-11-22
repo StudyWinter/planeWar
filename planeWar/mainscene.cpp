@@ -69,10 +69,16 @@ void MainScene::updatePosition()
     // 更新地图坐标
     m_map.mapPosition();
 
-    // 发射子弹
+    // 英雄飞机发射子弹
     m_hero.shoot();
 
-    // 计算子弹坐标
+    // 敌机发射子弹
+    for (int i = 0; i < ENEMY_NUM; i++) {
+        m_enemys[i].shoot();
+    }
+
+
+    // 计算英雄飞机子弹坐标
     for (int i = 0; i < BULLET_NUM; i++) {
         // 如果子弹是非空状态，计算发射位置
         if (m_hero.m_bullets[i].m_free == false) {
@@ -84,6 +90,16 @@ void MainScene::updatePosition()
     for (int i = 0; i < ENEMY_NUM; i++) {
         if (m_enemys[i].m_free == false) {
             m_enemys[i].updatePosition();
+        }
+    }
+
+    // 计算敌机子弹坐标
+    // 先遍历敌机，在遍历子弹
+    for (int i = 0; i < ENEMY_NUM; i++) {
+        for (int j = 0; j < ENEMY_BULLET_NUM; j++) {
+            if (m_enemys[i].m_bullets[j].m_free == false) {
+                m_enemys[i].m_bullets[j].updatePosition();
+            }
         }
     }
 
@@ -121,6 +137,17 @@ void MainScene::paintEvent(QPaintEvent *event)
             painter.drawPixmap(m_enemys[i].m_x, m_enemys[i].m_y, m_enemys[i].m_enemy);
         }
     }
+
+    // 绘制敌机子弹
+    // 先遍历敌机，在遍历子弹
+    for (int i = 0; i < ENEMY_NUM; i++) {
+        for (int j = 0; j < ENEMY_BULLET_NUM; j++) {
+            if (m_enemys[i].m_bullets[j].m_free == false) {
+                painter.drawPixmap(m_enemys[i].m_bullets[j].m_x, m_enemys[i].m_bullets[j].m_y, m_enemys[i].m_bullets[j].m_bullet);
+            }
+        }
+    }
+
 
     // 绘制爆炸图片
     for (int i = 0; i < BOMB_NUM; i++) {
@@ -178,6 +205,8 @@ void MainScene::enemyToScene()
             // 设置坐标
             m_enemys[i].m_x = rand() % (GAME_WIDTH - m_enemys[i].m_rect.width());
             m_enemys[i].m_y = -m_enemys[i].m_rect.height();
+            // 敌机发射子弹
+            m_enemys[i].shoot();
             break;
         }
     }
@@ -221,12 +250,7 @@ void MainScene::collisionDetection()
                         break;
                     }
                 }
-
-
             }
-
         }
-
     }
 }
-

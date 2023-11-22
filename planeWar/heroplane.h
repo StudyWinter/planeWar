@@ -2,7 +2,7 @@
 #define HEROPLANE_H
 #include <QPixmap>
 #include <QRect>
-#include "bullet.h"
+#include "herobullet.h"
 #include "config.h"
 
 
@@ -27,7 +27,7 @@ public:
     QRect m_rect;
 
     //弹匣
-    Bullet m_bullets[BULLET_NUM];
+    HeroBullet m_bullets[BULLET_NUM];
 
     //发射间隔记录
     int m_recorder;
